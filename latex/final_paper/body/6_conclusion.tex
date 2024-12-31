@@ -1,0 +1,47 @@
+\section{Conclusion and Future Work}
+\subsection{Conclusion}
+
+% talk about how this solves the problem of scalability when coupled with the federated system.
+In conclusion, this paper showed a method to plan for fusion in a decentralized satellite-based ground tracking system. 
+With continual improvements to satellite technology, decentralized satellite networks are the future of space domain awareness and tracking, thus, it's important to establish algorithms that can manage these massive proliferated networks.
+This paper showed a optimization approach to plan for data fusion across a distrbuted network of compute nodes.
+The algorithm was able to obey computational constraints per fusion node while also minimizing communication costs throughout the network.
+Additionally, the federated fusion structure presented in this paper when combined with this algorithm was able to solve the problem of scalability that so many other decentralized data fusion systems face, as seen in Figure~\ref{fig:federated_vs_ddf}.
+
+The basic fusion planning algorithm was also extended to account for different target priorities, which allows for the system to be adjusted to the needs of the user.
+It was shown that by incorporating a scaling factor into the algorithm to account for target priorities, given in Equation~\eqref{eq:exchange_rate}, the system was able to degrade in tracking targets in the correct manner if given an oversatured environment, as shown in Figure~\ref{fig:assignment_vs_exchange_rate}.
+Thus, a external user to the system could tune the exchange rate to match thier needs, whether that be minimizing communication costs or prioritizing tracking important targets.
+
+The algorithm presented in this paper relies on the specific fomrulation of the satellite network that was presented in the Problem Formulation section.
+This paper thus also showed a way to formulate a satellite network with the federated fusion architecture, which allows for advanced task assignment algorithms to be used.
+
+\subsection{Future Work}
+
+Although the algorithm and results presented in this paper are a successful start to planning for distrbuted fusion in a satellite network, there are many areas for future work.
+
+\subsubsection{Further Work on Target Priorities}
+The scenarios presented in this paper used the simplification that regions of the globe have a given prioritiy and targets existing in that region are assigned the same priority.
+However, there are more advanced ways to assign priorities to targets.
+In defense applications, priority of targets is not a function of where a current target is, but, where it is going; especially in missile defense applications.
+A scenario could be fomrulated where there are regions of defense priority. 
+Then, based on the estimated target dynamics, from fusion algorithms, the priority of a target is a function of which defense region the target appears to be headed towards.
+This would be a more advanced way to assign priorities to targets. 
+Once priorities are assigned to targets, the algorithm presented in this paper would be able to optimize accordingly.
+
+
+\subsubsection{Account for Raid Uncertainty}
+The solution presented in this paper assumes a constant, known, amount of targets are planned for over some given horizon. 
+However, in reality this is not true, targets are appearing and disappearing all across the globe.
+If you were able to get a probability distribution of new targets appearing in a certain region, an example discrete propability distribution would be a Poisson Distrbution~\cite{b9}, then you could plan the optimizaiton to account for this uncertainty.
+There are many methods solving an optimization under uncertainty probably such as minimizing the conditional value at risk \cite{b8}, or maximizing the expected value of the system.
+These methods would allow the system to plan with respect to a dynamic target environment and to guarantee probabilistic levels of performance.
+
+\subsubsection{Decentralized Optimization}
+The solution presented in this paper assumes the optimization algorithm is run with global knowledge of every satellites track estimates on targets.
+However, we know that purpose of this satellite system is to be decentralized, and with the federated fusion architecture each fusion node only has knowledge of a few targets in the environment, not all.
+Thus, a decentralized optimization algorithm could be ran to account for this.
+Decentralized task allocation algorithms have been shown to solve this type of problem, such as the bid warped consensus-based bundle algorithm (BW-CBBA) that is presented in~\cite{b3}.
+This algorithm allows independent agents to bid on tasks they would prefer to complete, based on a shared objective function and incomplete information. 
+Implementing this approach would allow the entire satellite system to be decentralized, and would allow for a more realistic simulation of the system.
+
+
